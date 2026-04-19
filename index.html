@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Love Question 💖</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            text-align: center;
+            font-family: Arial;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 400px;
+        }
+
+        h1 {
+            color: white;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            font-size: 20px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        #yesBtn {
+            background: green;
+            color: white;
+        }
+
+        #noBtn {
+            background: red;
+            color: white;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Do you love me? ❤️</h1>
+    <button id="yesBtn" onclick="yesClicked()">Yes 😍</button>
+    <button id="noBtn">No 😡</button>
+</div>
+
+<script>
+    let noClicks = 0;
+
+    function yesClicked() {
+        document.body.innerHTML = "<h1 style='color:white;'>Awww 😍 I love you too 💖</h1>";
+    }
+
+    function moveButton() {
+        let noBtn = document.getElementById("noBtn");
+        let yesBtn = document.getElementById("yesBtn");
+
+        noClicks++;
+
+        // Move No button randomly
+        let maxX = window.innerWidth - noBtn.offsetWidth;
+        let maxY = window.innerHeight - noBtn.offsetHeight;
+
+        noBtn.style.left = Math.random() * maxX + "px";
+        noBtn.style.top = Math.random() * maxY + "px";
+
+        // Shrink No button
+        let scale = Math.max(1 - noClicks * 0.2, 0.2);
+        noBtn.style.transform = "scale(" + scale + ")";
+
+        // Grow Yes button
+        let yesScale = 1 + noClicks * 0.2;
+        yesBtn.style.transform = "scale(" + yesScale + ")";
+
+        // After 5 tries → remove No button
+        if (noClicks >= 5) {
+            noBtn.style.display = "none";
+        }
+    }
+
+    let noBtn = document.getElementById("noBtn");
+
+    noBtn.addEventListener("mouseenter", moveButton);
+    noBtn.addEventListener("click", moveButton);
+</script>
+
+</body>
+</html>
