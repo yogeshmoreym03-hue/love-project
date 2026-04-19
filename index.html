@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Love Question 💖</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 400px;
+            z-index: 2;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            font-size: 20px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        #yesBtn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #noBtn {
+            background-color: #ff4d4d;
+            color: white;
+            position: absolute;
+        }
+
+        .angry {
+            animation: shake 0.3s;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(2px, 2px); }
+            25% { transform: translate(-2px, -2px); }
+            50% { transform: translate(2px, -2px); }
+            75% { transform: translate(-2px, 2px); }
+            100% { transform: translate(2px, 2px); }
+        }
+
+        /* ❤️ Floating hearts */
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 20px;
+            animation: floatUp 5s linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1.5);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Do you love me? ❤️</h1>
+
+    <button id="yesBtn" onclick="yesClicked()">Yes 😍</button>
+    <button id="noBtn" ontouchstart="moveButton()" onmouseover="moveButton()">No 😡</button>
+</div>
+
+<script>
+    function yesClicked() {
+        document.body.innerHTML = "<h1 style='color:white;'>Awwww 😍 I love you too! 💖</h1>";
+    }
+
+    function moveButton() {
+        let btn = document.getElementById("noBtn");
+
+        btn.classList.add("angry");
+        setTimeout(() => btn.classList.remove("angry"), 300);
+
+        let maxX = window.innerWidth - btn.offsetWidth;
+        let maxY = window.innerHeight - btn.offsetHeight;
+
+        let x = Math.random() * maxX;
+        let y = Math.random() * maxY;
+
+        btn.style.left = x + "px";
+        btn.style.top = y + "px";
+    }
+
+    // ❤️ Create floating hearts continuously
+    function createHeart() {
+        let heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (15 + Math.random() * 20) + "px";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 5000);
+    }
+
+    setInterval(createHeart, 300);
+</script>
+
+</body>
+</html>
